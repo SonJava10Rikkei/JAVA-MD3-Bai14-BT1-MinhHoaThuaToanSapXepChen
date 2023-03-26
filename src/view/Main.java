@@ -6,11 +6,13 @@ public class Main {
     public Main() {
         do {
             System.out.println("\"****************STUDENT MANAGE****************\");\n" +
-                    "                 \"1. Show List student\"\n" +
-                    "                 \"2. Create Student\"\n" +
-                    "                 \"3. Update Student\"\n" +
-                    "                 \"4. Delete Student\"\n" +
-                    "                 \"5. Sort Student By Name\"\n" +
+                    "                 \"1. Hiển thị danh sách sản phẩm\"\n" +
+                    "                 \"2. Thêm mới sản phẩm\"\n" +
+                    "                 \"3. Xóa sản phẩm theo Id\"\n" +
+                    "                 \"4. Chỉnh sửa sản phẩm\"\n" +
+                    "                 \"5. Tìm kiếm theo tên sản phẩm\"\n" +
+                    "                 \"6. Sắp sếp théo giá tăng dần của sản phẩm\"\n" +
+
                     "                 \"0. Thoát chương trình\"\n" +
                     "\"**********************************************\"\n" +
                     "                 Mời chọn: ");
@@ -32,12 +34,20 @@ public class Main {
                     new ProductView().createTabelProduct();
                     break;
                 case 3:
+                    new ProductView().deleteById();
                     break;
                 case 4:
+                    new ProductView().editProduct();
                     break;
                 case 5:
+                    new ProductView().findProductByName();
+                    break;
+                case 6:
+                    new ProductView().sortProductByPrice();
                     break;
                 case 0:
+                    System.exit(0);
+                    System.err.println("Đã thoắt chương trình ! ");
                     break;
                 default:
                     System.out.println("Hãy nhập lại lựa chọn của bạn (1-5) ");
