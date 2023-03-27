@@ -54,44 +54,33 @@ public class ProductView {
         return maxId;
     }
 
-    // 3,1 tìm kiếm sản phẩm
-    public int findIndexById(int id) {
-        for (int i = 0; i < productList.size(); i++) {
-            if (id == productList.get(i).getId()) {
-                return i;
-            }
-        }
-        System.out.println("Không tìm thấy sản phẩm trong danh sách");
-        return -1;
-    }
-
     public void editProduct() {
         System.out.println("Nhập ID của sản phẩm bạn muốn chỉnh sửa: ");
         int id = Config.scanner().nextInt();
-        int index = findIndexById(id);
-        if (index != -1) {
-            System.out.println("Nhập tên sản phẩm mới: ");
-            String newName = Config.scanner().nextLine();
-            System.out.println("Nhập giá sản phẩm mới: ");
-            double newPrice = Config.scanner().nextDouble();
-            productList.get(index).setName(newName);
-            productList.get(index).setPrice(newPrice);
-            System.out.println("__Đã cập nhật sản phẩm__! ");
-            System.out.println("Nhấn enter hoặc nhập bất kì ký tự nào để quay lại Menu");
-            String backMenu = Config.scanner().nextLine();
-            if (backMenu.equalsIgnoreCase("back")) ;
-            new Main();
+        for (int i = 0; i < productList.size(); i++) {
+            if (id == productList.get(i).getId()) {
+                System.out.println("Sản phẩm bạn muốn chỉnh sửa là: " + productList.get(i));
+            }
         }
+        System.out.println("Nhập tên mới cho sản phẩm : ");
+        String newName = Config.scanner().nextLine();
+        System.out.println("Nhập giá mới cho sản phẩm : ");
+        double newPrice = Config.scanner().nextDouble();
+        Product newProduct = new Product(id, newName, newPrice);
+        productController.createProduct(newProduct);
+        System.out.println("__Đã cập nhật sản phẩm__! ");
+        System.out.println("Nhấn enter hoặc nhập bất kì ký tự nào để quay lại Menu");
+        String backMenu = Config.scanner().nextLine();
+        if (backMenu.equalsIgnoreCase("back")) ;
+        new Main();
     }
+
 
     //     3.2 Xóa sản phẩm
     public void deleteById() {
         System.out.println("Nhập Id của sản phẩm bạn muốn xóa");
         int id = Config.scanner().nextInt();
-        int index = findIndexById(id);
-        if (index != -1) {
-            productList.remove(index);
-        }
+        productController.deleteProduct(id);
         System.out.println("__Đã xóa sản phẩm__");
         System.out.println("Nhấn enter hoặc nhập bất kì ký tự nào để quay lại Menu");
         String backMenu = Config.scanner().nextLine();
@@ -102,17 +91,21 @@ public class ProductView {
     // 5 Tìm kiếm sản phẩm theo tên
     public void findProductByName() {
         System.out.println("Nhập tên sản phẩm cần tìm: ");
-        String name = Config.scanner().nextLine();
+        String name = Config.scanner().nextLine().toLowerCase();
         boolean found = false;
         for (Product product : productList) {
-            if (product.getName().contains(name)) {
-                System.out.println(product);
+            if (product.getName().toLowerCase().contains(name)) {
+                System.out.println("Sản phẩm bạn muốn tìm là: "+product);
                 found = true;
             }
         }
         if (!found) {
             System.out.println("Không tìm thấy sản phẩm với tên \"" + name + "\" trong danh sách.");
         }
+        System.out.println("Nhấn enter hoặc nhập bất kì ký tự nào để quay lại Menu");
+        String backMenu = Config.scanner().nextLine();
+        if (backMenu.equalsIgnoreCase("back")) ;
+        new Main();
     }
 
     // 6. Sắp xếp theo giá tăng dần và giảm dần đổi +-1
@@ -138,6 +131,5 @@ public class ProductView {
         String backMenu = Config.scanner().nextLine();
         if (backMenu.equalsIgnoreCase("back")) ;
         new Main();
-
     }
 }

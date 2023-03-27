@@ -23,7 +23,7 @@ public class Main {
                     chooseMenu = Integer.parseInt(Config.scanner().nextLine());
                     break;
                 } catch (NumberFormatException Err) {
-                    System.out.println("Hãy nhập số bạn muốn lựa chọn: (0-6");
+                    System.err.println("Hãy nhập số mà bạn muốn lựa chọn: (0-6");
                 }
             }
             switch (chooseMenu) {
@@ -53,8 +53,6 @@ public class Main {
                     System.out.println("Hãy nhập lại lựa chọn của bạn (1-5) ");
             }
         } while (true);
-
-
     }
 
     public static void main(String[] args) {

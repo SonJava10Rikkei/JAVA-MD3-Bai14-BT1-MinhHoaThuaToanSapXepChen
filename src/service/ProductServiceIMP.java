@@ -22,8 +22,12 @@ public class ProductServiceIMP implements IProductService {
 
     @Override
     public void save(Product product) {
-        productList.add(product);
-
+        if (findById(product.getId()) != null) {
+            int index = productList.indexOf(findById(product.getId()));
+            productList.set(index, product);
+        } else {
+            productList.add(product);
+        }
     }
 
 

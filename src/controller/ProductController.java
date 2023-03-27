@@ -16,4 +16,8 @@ public class ProductController {
     public void createProduct(Product product) {
         productService.save(product);
     }
+
+    public void deleteProduct(int id) {
+        productService.deleteById(id);
+    }
 }
